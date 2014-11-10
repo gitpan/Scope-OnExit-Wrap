@@ -5,30 +5,30 @@ use strict;
 
 use base 'Exporter';
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 our @EXPORT = qw(on_scope_exit);
 
 our $_backend;
 
 if (!$ENV{SCOPE_ONEXIT_WRAP_PP} && eval { require Scope::OnExit }) {
-	Scope::OnExit->import;
-	$_backend = 'XS';
+    Scope::OnExit->import;
+    $_backend = 'XS';
 } else {
-	eval <<'EOT';
+    eval <<'EOT';
 sub on_scope_exit (&) {
-	my ($code) = @_;
-	bless \$code, __PACKAGE__
+    my ($code) = @_;
+    bless \$code, __PACKAGE__
 }
 
 sub DESTROY {
-	my $self = shift;
-	$$self->();
+    my $self = shift;
+    $$self->();
 }
 
-$_backend = 'PP';
 EOT
-	die $@ if $@;
+    die $@ if $@;
+    $_backend = 'PP';
 }
 
 'ok'

@@ -1,10 +1,10 @@
 {
-   "abstract" : "unknown",
+   "abstract" : "run code on scope exit (with pure Perl fallback)",
    "author" : [
       "Lukas Mai <l.mai@web.de>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "ExtUtils::MakeMaker version 6.64, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "ExtUtils::MakeMaker version 7, CPAN::Meta::Converter version 2.142690",
    "license" : [
       "perl_5"
    ],
@@ -22,15 +22,20 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Test::More" : "0"
+            "ExtUtils::MakeMaker" : "0"
          }
       },
       "configure" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "6.56"
+            "ExtUtils::MakeMaker" : "6.56",
+            "strict" : "0",
+            "warnings" : "0"
          }
       },
       "runtime" : {
+         "recommends" : {
+            "Scope::OnExit" : "0"
+         },
          "requires" : {
             "Exporter" : "0",
             "base" : "0",
@@ -38,9 +43,20 @@
             "strict" : "0",
             "warnings" : "0"
          }
+      },
+      "test" : {
+         "requires" : {
+            "Test::More" : "0"
+         }
       }
    },
    "release_status" : "stable",
-   "resources" : {},
-   "version" : "0.01"
+   "resources" : {
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/mauke/Scope-OnExit-Wrap.git",
+         "web" : "https://github.com/mauke/Scope-OnExit-Wrap"
+      }
+   },
+   "version" : "0.02"
 }
